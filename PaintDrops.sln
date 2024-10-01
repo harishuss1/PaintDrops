@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaintDrops", "PaintDrops\PaintDrops.csproj", "{C4D61B36-BD2C-4A31-AECD-467E68A652FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaintDropSimulation", "PaintDropSimulation\PaintDropSimulation.csproj", "{6E61B156-F9FF-48BF-93EB-306EB8F4415B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingLibrary", "DrawingLibrary\DrawingLibrary.csproj", "{369D8A29-E254-4C0C-AB0E-ECEF6FC76714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLibrary", "ShapeLibrary\ShapeLibrary.csproj", "{9A6813E5-37E5-467D-AD46-14DF768FA8B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLibraryTests", "ShapeLibraryTests\ShapeLibraryTests.csproj", "{A371B9E8-CB8D-4AA3-948F-77007A1FAE49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4D61B36-BD2C-4A31-AECD-467E68A652FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D61B36-BD2C-4A31-AECD-467E68A652FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D61B36-BD2C-4A31-AECD-467E68A652FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D61B36-BD2C-4A31-AECD-467E68A652FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E61B156-F9FF-48BF-93EB-306EB8F4415B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E61B156-F9FF-48BF-93EB-306EB8F4415B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E61B156-F9FF-48BF-93EB-306EB8F4415B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E61B156-F9FF-48BF-93EB-306EB8F4415B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{369D8A29-E254-4C0C-AB0E-ECEF6FC76714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{369D8A29-E254-4C0C-AB0E-ECEF6FC76714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{369D8A29-E254-4C0C-AB0E-ECEF6FC76714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{369D8A29-E254-4C0C-AB0E-ECEF6FC76714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6813E5-37E5-467D-AD46-14DF768FA8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6813E5-37E5-467D-AD46-14DF768FA8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6813E5-37E5-467D-AD46-14DF768FA8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6813E5-37E5-467D-AD46-14DF768FA8B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A371B9E8-CB8D-4AA3-948F-77007A1FAE49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A371B9E8-CB8D-4AA3-948F-77007A1FAE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A371B9E8-CB8D-4AA3-948F-77007A1FAE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A371B9E8-CB8D-4AA3-948F-77007A1FAE49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
