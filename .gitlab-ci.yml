@@ -1,0 +1,40 @@
+default:
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - build
+  - test
+
+build-debug:
+  stage: build
+  script:
+    - echo "Building in Debug mode!"
+    - dotnet restore
+    - dotnet build -c Debug
+
+build-release:
+  stage: build
+  script:
+    - echo "Building in Release mode!"
+    - dotnet restore
+    - dotnet build -c Release
+    - echo "Publishing PaintDrops as a no-self-contained app"
+    - dotnet publish PaintDrops -c Release -r win-x64 --no-self-contained -p:PublishSingleFile-true -o publish
+    - echo "Creating a tar file of the published game"
+    - tar -cvf Game.tar -C publish .
+  artifacts:
+    paths:
+      - Game.tar
+
+test:
+  stage: test
+  script:
+    - echo "Running tests"
+    - 'dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"'
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit:
+        - ./**/*test-result.xml
