@@ -61,6 +61,19 @@ namespace ShapeLibrary.Tests
         }
 
         [TestMethod]
+        public void Test_Colour_Addition_Negative_Overflow()
+        {
+            Colour c1 = new Colour(200, 200, 200);
+            Colour c2 = new Colour(100, 100, 100);
+
+            Colour result = c1 + c2;
+
+            Assert.AreEqual(255, result.Red);  
+            Assert.AreEqual(255, result.Green);
+            Assert.AreEqual(255, result.Blue);
+        }
+
+        [TestMethod]
         public void Test_Colour_Subtraction_Positive()
         {
             Colour c1 = new Colour(100, 100, 100);
@@ -71,6 +84,19 @@ namespace ShapeLibrary.Tests
             Assert.AreEqual(50, result.Red);
             Assert.AreEqual(50, result.Green);
             Assert.AreEqual(50, result.Blue);
+        }
+
+        [TestMethod]
+        public void Test_Colour_Subtraction_Negative_Underflow()
+        {
+            Colour c1 = new Colour(50, 50, 50);
+            Colour c2 = new Colour(100, 100, 100);
+
+            Colour result = c1 - c2;
+
+            Assert.AreEqual(0, result.Red);  
+            Assert.AreEqual(0, result.Green);
+            Assert.AreEqual(0, result.Blue);
         }
 
         [TestMethod]
@@ -94,7 +120,7 @@ namespace ShapeLibrary.Tests
 
             Colour result = colour * scale;
 
-            Assert.AreEqual(255, result.Red);
+            Assert.AreEqual(255, result.Red); 
             Assert.AreEqual(255, result.Green);
             Assert.AreEqual(255, result.Blue);
         }
@@ -109,12 +135,30 @@ namespace ShapeLibrary.Tests
         }
 
         [TestMethod]
+        public void Test_Colour_Equality_Negative()
+        {
+            Colour c1 = new Colour(100, 150, 200);
+            Colour c2 = new Colour(200, 150, 100);
+
+            Assert.IsFalse(c1 == c2);
+        }
+
+        [TestMethod]
         public void Test_Colour_Inequality_Positive()
         {
             Colour c1 = new Colour(100, 150, 200);
             Colour c2 = new Colour(200, 150, 100);
 
             Assert.IsTrue(c1 != c2);
+        }
+
+        [TestMethod]
+        public void Test_Colour_Inequality_Negative()
+        {
+            Colour c1 = new Colour(100, 150, 200);
+            Colour c2 = new Colour(100, 150, 200);
+
+            Assert.IsFalse(c1 != c2);
         }
 
         [TestMethod]
