@@ -30,14 +30,35 @@ namespace ShapeLibrary
 
         public static Vector operator -(Vector a, Vector b)
         {
-            return new Vector((-a.X - b.X), (-a.Y - b.Y));
+            return new Vector(a.X - b.X, a.Y - b.Y);
+        }
+
+        public static Vector operator *(Vector a, int scalar)
+        {
+            return new Vector(a.X * scalar, a.Y * scalar);
+        }
+        public static Vector operator *(int scalar, Vector a)
+        {
+            return a * scalar;
         }
 
         public static Vector operator *(Vector a, float scalar)
         {
             return new Vector(a.X * scalar, a.Y * scalar);
         }
+        public static Vector operator *(float scalar, Vector a)
+        {
+            return a*scalar;
+        }
 
+        public static Vector operator /(Vector a, int scalar)
+        {
+            if (scalar == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero.");
+            }
+            return new Vector(a.X / scalar, a.Y / scalar);
+        }
         public static Vector operator /(Vector a, float scalar)
         {
             if (scalar == 0)
@@ -54,11 +75,12 @@ namespace ShapeLibrary
 
         public static Vector Normalize(Vector v)
         {
-            float magnitude = Magnitude(v);
-            if (magnitude == 0)
+            if(v.X == 0 && v.Y == 0)
             {
-                throw new InvalidOperationException("Cannot normalize a vector with magnitude of 0.");
+                return new Vector(0, 0);
             }
+            float magnitude = Magnitude(v);
+           
             return v / magnitude;
         }
 
