@@ -12,6 +12,14 @@ namespace ShapeLibrary.Tests
     public class VectorTests
     {
         [TestMethod]
+        public void TestConstructor_PositiveValues()
+        {
+            Vector v = new Vector(3, 4);
+
+            Assert.AreEqual(3, v.X);
+            Assert.AreEqual(4, v.Y);
+        }
+        [TestMethod]
         public void TestVectorAddition_Positive()
         {
             Vector v1 = new Vector(1, 2);
@@ -127,6 +135,26 @@ namespace ShapeLibrary.Tests
 
             Assert.AreEqual(-2, result.X);
             Assert.AreEqual(-3, result.Y);
+        }
+
+        [TestMethod]
+        public void TestVectorDivision_ByFloat()
+        {
+            Vector v = new Vector(6, 8);
+            float scalar = 2f;
+            Vector result = v / scalar;
+
+            Assert.AreEqual(3, result.X);
+            Assert.AreEqual(4, result.Y);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DivideByZeroException))]
+        public void TestVectorDivision_ByZeroFloat()
+        {
+            Vector v = new Vector(6, 8);
+            float scalar = 0f;
+            Vector result = v / scalar;  // Should throw exception
         }
 
         [TestMethod]
