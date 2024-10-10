@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ShapeLibrary
 {
-    public class Rectangle
+    public class Rectangle : IShape
     {
 
         public float X { get; }
         public float Y { get; }
         public float Width { get; }
         public float Height { get; }
-        public string Colour { get; }
+        public Colour Colour { get; }
 
 
 
@@ -35,7 +35,7 @@ namespace ShapeLibrary
             }
         }
 
-        public Rectangle(float x, float y, float width, float height, string colour)
+        public Rectangle(float x, float y, float width, float height, Colour colour)
         {
 
             if (width <= 0 || height <= 0)
