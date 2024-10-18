@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("ShapeLibraryTests")]
+
 namespace ShapeLibrary
 {
-    public class Rectangle
+    internal class Rectangle : IRectangle
     {
 
         public float X { get; }
         public float Y { get; }
         public float Width { get; }
         public float Height { get; }
-        public string Colour { get; }
+        public Colour Colour { get; }
 
 
 
@@ -35,7 +38,7 @@ namespace ShapeLibrary
             }
         }
 
-        public Rectangle(float x, float y, float width, float height, string colour)
+        public Rectangle(float x, float y, float width, float height, Colour colour)
         {
 
             if (width <= 0 || height <= 0)

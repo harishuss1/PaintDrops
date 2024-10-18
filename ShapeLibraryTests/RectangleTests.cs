@@ -14,8 +14,8 @@ namespace ShapeLibrary.Tests
         [TestMethod]
         public void ConstructorTest()
         {
-            string colour = "Red";
-            Rectangle rec = new Rectangle(2, 4, 200, 400, colour);
+            Colour colour = new Colour(200, 200, 200);
+            Rectangle rec = new Rectangle(2, 4, 200, 400, new Colour(200, 200, 200));
             Assert.AreEqual(rec.X, 2);
             Assert.AreEqual(rec.Y, 4);
             Assert.AreEqual(rec.Width, 200);
@@ -26,7 +26,7 @@ namespace ShapeLibrary.Tests
         [TestMethod]
         public void Rectangle_Vertices_ShouldReturnCorrectVertices()
         {
-            Rectangle rectangle = new Rectangle(10, 20, 30, 40, "Red");
+            Rectangle rectangle = new Rectangle(10, 20, 30, 40, new Colour(200, 200, 200));
 
             Vector[] vertices = rectangle.Vertices;
 
@@ -41,38 +41,34 @@ namespace ShapeLibrary.Tests
         [ExpectedException(typeof(ArgumentException), "Negative values for height and width")]
         public void NegativeConstructorWidthTest()
         {
-            string colour = "Red";
-            Rectangle rec = new Rectangle(2, 4, -200, 400, colour);
+            Rectangle rec = new Rectangle(2, 4, -200, 400, new Colour(200, 200, 200));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Negative values for height and width")]
         public void NegativeConstructorHeightTest()
         {
-            string colour = "Red";
-            Rectangle rec = new Rectangle(2, 4, 20, -40, colour);
+            Rectangle rec = new Rectangle(2, 4, 20, -40, new Colour(200, 200, 200));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Negative values for height and width")]
         public void NegativeConstructorWidthZeroTest()
         {
-            string colour = "Red";
-            Rectangle rec = new Rectangle(2, 4, 0, 40, colour);
+            Rectangle rec = new Rectangle(2, 4, 0, 40, new Colour(200, 200, 200));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Negative values for height and width")]
         public void NegativeConstructorHeightZeroTest()
         {
-            string colour = "Red";
-            Rectangle rec = new Rectangle(2, 4, 20, 0, colour);
+            Rectangle rec = new Rectangle(2, 4, 20, 0, new Colour(200, 200, 200));
         }
 
         [TestMethod]
         public void Rectangle_Vertices_ShouldBeCachedAfterFirstAccess()
         {
-            Rectangle rectangle = new Rectangle(10, 20, 30, 40, "Blue");
+            Rectangle rectangle = new Rectangle(10, 20, 30, 40, new Colour(200, 200, 200));
 
             var firstAccess = rectangle.Vertices;
             var secondAccess = rectangle.Vertices;

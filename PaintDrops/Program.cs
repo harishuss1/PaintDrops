@@ -1,3 +1,3 @@
 ﻿
-using var game = new PaintDrops.Game1();
+using var game = new PaintDrops.PaintDrops();
 game.Run();
