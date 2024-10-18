@@ -11,6 +11,11 @@ namespace PaintDropSimulation
     {
         public ICircle Circle {  get;}
 
+        public PaintDrop(ICircle circle)
+        {
+            Circle = circle;
+        }
+
         public void Marble(IPaintDrop other)
         {
             RecalculateVerticesForMarble(this.Circle, other.Circle);
