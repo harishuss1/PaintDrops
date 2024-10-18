@@ -5,6 +5,7 @@ using DrawingLibrary.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PaintDropSimulation;
 using ShapeLibrary;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,6 +23,8 @@ public class PaintDrops : Game
     private ISpritesRenderer _spritesRenderer;
     private List<IShape> _shapes;
     private IShapesRenderer _shapesRenderer;
+    private ISurface _surface;
+    private IPaintDrop _paintDrop;
 
 
     public PaintDrops()
@@ -37,6 +40,7 @@ public class PaintDrops : Game
         _shapes = new List<IShape>();
         _renderTarget = new RenderTarget2D(GraphicsDevice, 640, 480);
         screen = new Screen(_renderTarget);
+        _surface = PaintDropSimulationFactory.CreateSurface();
 
 
         base.Initialize();
@@ -56,22 +60,27 @@ public class PaintDrops : Game
         _customKeyboard.Update();
         _customMouse.Update();
 
-        if (_customMouse.IsRightButtonClicked())
-        {
-            Vector2? screenPosition = _customMouse.GetScreenPosition(screen);
-            if (screenPosition.HasValue)
-            {
-                _shapes.Add(ShapesFactory.CreateRectangle(screenPosition.Value.X, screenPosition.Value.Y, 100, 70, new Colour(0, 0, 200)));
-            }
+        //if (_customMouse.IsRightButtonClicked())
+        //{
+        //    Vector2? screenPosition = _customMouse.GetScreenPosition(screen);
+        //    if (screenPosition.HasValue)
+        //    {
+        //        _shapes.Add(ShapesFactory.CreateRectangle(screenPosition.Value.X, screenPosition.Value.Y, 100, 70, new Colour(0, 0, 200)));
+        //    }
 
-        }
+        //}
         if (_customMouse.IsLeftButtonClicked())
         {
 
             Vector2? screenPosition = _customMouse.GetScreenPosition(screen);
             if (screenPosition.HasValue)
             {
-                _shapes.Add(ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, 50, new Colour(200, 0, 0)));
+                ICircle circle = ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, 50, new Colour(200, 0, 0));
+
+                IPaintDrop drop = PaintDropSimulationFactory.CreatePaintDrop(circle);
+
+
+                _surface.AddPaintDrop(drop);
             }
         }
 
@@ -92,9 +101,9 @@ public class PaintDrops : Game
         GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.White);
         _shapesRenderer.Begin();
 
-        foreach (IShape shape in _shapes)
+        foreach (IPaintDrop drops in _surface.Drops)
         {
-            _shapesRenderer.DrawShape(shape);
+            _shapesRenderer.DrawShape(drops.Circle);
 
         }
 
