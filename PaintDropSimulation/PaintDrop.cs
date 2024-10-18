@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("PaintDropSimulationTests")]
 
 namespace PaintDropSimulation
 {
@@ -13,11 +16,21 @@ namespace PaintDropSimulation
 
         public PaintDrop(ICircle circle)
         {
+            if (circle == null)
+            {
+                throw new ArgumentNullException("circle is null");
+            }
+
             Circle = circle;
         }
 
         public void Marble(IPaintDrop other)
         {
+            if(other == null)
+            {
+                throw new ArgumentNullException("other is null ");
+            }
+
             RecalculateVerticesForMarble(this.Circle, other.Circle);
         }
 

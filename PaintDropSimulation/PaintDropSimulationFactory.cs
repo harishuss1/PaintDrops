@@ -14,9 +14,9 @@ namespace PaintDropSimulation
             return paintDrop;
         }
 
-        public static ISurface CreateSurface()
+        public static ISurface CreateSurface(int width, int height)
         {
-            ISurface surface = new Surface();
+            ISurface surface = new Surface(width,height);
             return surface;
         }
     }

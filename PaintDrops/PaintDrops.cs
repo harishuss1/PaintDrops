@@ -40,7 +40,7 @@ public class PaintDrops : Game
         _shapes = new List<IShape>();
         _renderTarget = new RenderTarget2D(GraphicsDevice, 640, 480);
         screen = new Screen(_renderTarget);
-        _surface = PaintDropSimulationFactory.CreateSurface();
+        _surface = PaintDropSimulationFactory.CreateSurface(screen.Width,screen.Height);
 
 
         base.Initialize();
