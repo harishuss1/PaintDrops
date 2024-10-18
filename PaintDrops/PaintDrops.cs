@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PaintDropSimulation;
 using ShapeLibrary;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -24,7 +25,6 @@ public class PaintDrops : Game
     private List<IShape> _shapes;
     private IShapesRenderer _shapesRenderer;
     private ISurface _surface;
-    private IPaintDrop _paintDrop;
 
 
     public PaintDrops()
@@ -60,22 +60,24 @@ public class PaintDrops : Game
         _customKeyboard.Update();
         _customMouse.Update();
 
-        //if (_customMouse.IsRightButtonClicked())
-        //{
-        //    Vector2? screenPosition = _customMouse.GetScreenPosition(screen);
-        //    if (screenPosition.HasValue)
-        //    {
-        //        _shapes.Add(ShapesFactory.CreateRectangle(screenPosition.Value.X, screenPosition.Value.Y, 100, 70, new Colour(0, 0, 200)));
-        //    }
+        if (_customMouse.IsRightButtonClicked())
+        {
+            _surface.Drops.Clear();
 
-        //}
+        }
+
         if (_customMouse.IsLeftButtonClicked())
         {
-
+            
             Vector2? screenPosition = _customMouse.GetScreenPosition(screen);
             if (screenPosition.HasValue)
             {
-                ICircle circle = ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, 50, new Colour(200, 0, 0));
+                Random random = new Random();
+                int red = random.Next(0, 256);
+                int green = random.Next(0, 256);
+                int blue = random.Next(0, 256);
+                Colour randomColor = new Colour(red, green, blue);
+                ICircle circle = ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, 50, randomColor);
 
                 IPaintDrop drop = PaintDropSimulationFactory.CreatePaintDrop(circle);
 
@@ -83,14 +85,6 @@ public class PaintDrops : Game
                 _surface.AddPaintDrop(drop);
             }
         }
-
-        if (_customMouse.IsMiddleButtonClicked())
-        {
-            _shapes.Clear();
-        }
-
-
-
 
         base.Update(gameTime);
     }
