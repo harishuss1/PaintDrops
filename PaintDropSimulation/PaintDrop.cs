@@ -26,41 +26,30 @@ namespace PaintDropSimulation
 
         public void Marble(IPaintDrop other)
         {
-            if(other == null)
+            if (other == null)
             {
-                throw new ArgumentNullException("other is null ");
+                throw new ArgumentException("Other paint drop cannot be null");
             }
 
-            RecalculateVerticesForMarble(this.Circle, other.Circle);
-        }
+            Vector otherCenter = other.Circle.Center;
+            float otherRadius = other.Circle.Radius;
 
-        private Vector ApplyMarbleFormula(Vector P, ICircle existingCircle, ICircle newCircle)
-        {
-            Vector C_existing = existingCircle.Center; 
-            Vector C_new = newCircle.Center;           
-            float r_new = newCircle.Radius;            
-
-            float distanceSquared = Vector.Magnitude(P - C_new) * Vector.Magnitude(P - C_new);
-
-            if (distanceSquared > 0) 
+            for (int i = 0; i < Circle.Vertices.Length; i++)
             {
-                Vector displacement = (P - C_new) * (float)Math.Sqrt(1 + (r_new * r_new) / distanceSquared);
-                return C_new + displacement;
-            }
-            else
-            {
-                return P;
+                Vector currentVertex = Circle.Vertices[i];
+                Vector differenceVector = currentVertex - otherCenter;
+
+                float magnitudeSquared = (float)(Math.Pow(differenceVector.X, 2) + Math.Pow(differenceVector.Y, 2));
+
+                if (magnitudeSquared > 0)
+                {
+                    float scalingFactor = (float)Math.Sqrt(1 + Math.Pow(otherRadius, 2) / magnitudeSquared);
+                    Vector newVertexPosition = otherCenter + differenceVector * scalingFactor;
+
+                    Circle.Vertices[i] = newVertexPosition;
+                }
             }
         }
-
-        private void RecalculateVerticesForMarble(ICircle existingCircle, ICircle newCircle)
-        {
-            for (int i = 0; i < existingCircle.Vertices.Length; i++)
-            {
-                Vector displacedVertex = ApplyMarbleFormula(existingCircle.Vertices[i], existingCircle, newCircle);
-                existingCircle.Vertices[i] = displacedVertex;
-            }
         }
-    }
 }
 
