@@ -22,7 +22,6 @@ public class PaintDrops : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private ISpritesRenderer _spritesRenderer;
-    private List<IShape> _shapes;
     private IShapesRenderer _shapesRenderer;
     private ISurface _surface;
 
@@ -37,7 +36,6 @@ public class PaintDrops : Game
 
     protected override void Initialize()
     {
-        _shapes = new List<IShape>();
         _renderTarget = new RenderTarget2D(GraphicsDevice, 640, 480);
         screen = new Screen(_renderTarget);
         _surface = PaintDropSimulationFactory.CreateSurface(screen.Width,screen.Height);
