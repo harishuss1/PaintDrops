@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PaintDropSimulation;
+using PatternGenerationLib;
 using ShapeLibrary;
 using System;
 using System.Collections.Generic;
@@ -96,6 +97,34 @@ namespace PaintDropSimulation.Tests
             Assert.AreEqual(1, surface.Drops.Count);
             Assert.AreEqual(50, drop.Circle.Radius);  
         }
-    
+
+        [TestMethod]
+        public void GeneratePaintDropPattern_ShouldGeneratePatternAndAddToSurface()
+        {
+            var surface = PaintDropSimulationFactory.CreateSurface(500, 500);
+            var patternGenerator = new PhyllotaxisPatternGeneration(10);
+            surface.PatternGeneration += patternGenerator.CalculatePatternPoint;
+
+            surface.GeneratePaintDropPattern(50, new Colour(0, 0, 255));
+
+            Assert.AreEqual(1, surface.Drops.Count, "new paint drop should be added to the surface.");
+        }
+
+        [TestMethod]
+        public void GeneratePaintDropPattern_ShouldRestartPatternAfterReset()
+        {
+            var surface = PaintDropSimulationFactory.CreateSurface(500, 500);
+            var patternGenerator = new PhyllotaxisPatternGeneration(10);
+            surface.PatternGeneration += patternGenerator.CalculatePatternPoint;
+
+            surface.GeneratePaintDropPattern(50, new Colour(0, 0, 255));
+            patternGenerator._currentPointIndex = 0;
+            surface.GeneratePaintDropPattern(50, new Colour(0, 0, 255));
+
+            Assert.AreEqual(2, surface.Drops.Count, "Two paint drops should be added to the surface.");
+            Assert.AreEqual(surface.Drops[0].Circle.Center, surface.Drops[1].Circle.Center, "The pattern should restart after reset.");
+        }
+
+
     }
 }
