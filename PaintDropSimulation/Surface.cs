@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ShapeLibrary;
 
 [assembly: InternalsVisibleTo("PaintDropSimulationTests")]
 
@@ -14,6 +15,8 @@ namespace PaintDropSimulation
         public int Width { get; }
         public int Height { get; }
         public List<IPaintDrop> Drops { get; }
+
+        public event CalculatePatternPoint? PatternGeneration;
 
         public Surface(int width, int height)
         {
@@ -42,8 +45,18 @@ namespace PaintDropSimulation
                 }
             }
         }
+
+        public void GeneratePaintDropPattern(float radius, Colour colour)
+        {
+            Vector? position = PatternGeneration?.Invoke(this);
+
+            if (position.HasValue)
+            {
+                ICircle circle = ShapesFactory.CreateCircle(position.Value.X, position.Value.Y, radius, colour);
+
+                IPaintDrop newDrop = PaintDropSimulationFactory.CreatePaintDrop(circle);
+                AddPaintDrop(newDrop);  
+            }
+        }
     }
 }
-
-
-
