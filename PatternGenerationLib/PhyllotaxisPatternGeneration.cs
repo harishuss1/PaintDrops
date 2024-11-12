@@ -14,7 +14,7 @@ namespace PatternGenerationLib
         private float _scalingFactor;
         public int _currentPointIndex;
 
-        public PhyllotaxisPatternGeneration(float scalingFactor = 15)
+        public PhyllotaxisPatternGeneration(float scalingFactor)
         {
             _scalingFactor = scalingFactor;
             _currentPointIndex = 0;

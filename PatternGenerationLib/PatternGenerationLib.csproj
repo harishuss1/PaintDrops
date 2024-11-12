@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PaintDropSimulation\PaintDropSimulation.csproj" />
+    <ProjectReference Include="..\ShapeLibrary\ShapeLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PaintDropSimulation;
+using PatternGenerationLib;
 using ShapeLibrary;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ public class PaintDrops : Game
     private ISpritesRenderer _spritesRenderer;
     private IShapesRenderer _shapesRenderer;
     private ISurface _surface;
-
+    private IPatternGenerator _patternGenerator;
+    private bool _isPatternGenerating;
 
     public PaintDrops()
     {
@@ -40,6 +42,8 @@ public class PaintDrops : Game
         screen = new Screen(_renderTarget);
         _surface = PaintDropSimulationFactory.CreateSurface(screen.Width,screen.Height);
 
+        _patternGenerator = new PhyllotaxisPatternGeneration(10);
+        _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
 
         base.Initialize();
     }
@@ -57,6 +61,15 @@ public class PaintDrops : Game
     {
         _customKeyboard.Update();
         _customMouse.Update();
+
+        if (_customKeyboard.IsKeyClicked(Keys.M))
+        {
+            _isPatternGenerating = true; 
+        }
+        if (_customKeyboard.IsKeyClicked(Keys.E))
+        {
+            _isPatternGenerating = false;
+        }
 
         if (_customMouse.IsRightButtonClicked())
         {
@@ -82,6 +95,10 @@ public class PaintDrops : Game
 
                 _surface.AddPaintDrop(drop);
             }
+        }
+        if (_isPatternGenerating)
+        {
+            _surface.GeneratePaintDropPattern(5, new Colour(255, 0, 0)); 
         }
 
         base.Update(gameTime);
