@@ -48,6 +48,12 @@ namespace PaintDropSimulation
 
         public void GeneratePaintDropPattern(float radius, Colour colour)
         {
+
+            if (PatternGeneration == null)
+            {
+                throw new InvalidOperationException("event is null.");
+            }
+
             Vector? position = PatternGeneration?.Invoke(this);
 
             if (position.HasValue)
