@@ -25,7 +25,7 @@ public class PaintDrops : Game
     private ISpritesRenderer _spritesRenderer;
     private IShapesRenderer _shapesRenderer;
     private ISurface _surface;
-    private PhyllotaxisPatternGeneration _patternGenerator;
+    private IPatternGenerator _patternGenerator;
     private bool _isPatternGenerating;
 
     public PaintDrops()
@@ -42,7 +42,7 @@ public class PaintDrops : Game
         screen = new Screen(_renderTarget);
         _surface = PaintDropSimulationFactory.CreateSurface(screen.Width,screen.Height);
 
-        _patternGenerator = new PhyllotaxisPatternGeneration(10);
+        _patternGenerator = PatternGenerationFactory.CreatePhylloPattern(10);
         _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
 
         base.Initialize();
@@ -69,8 +69,6 @@ public class PaintDrops : Game
         if (_customKeyboard.IsKeyClicked(Keys.E))
         {
             _isPatternGenerating = false;
-            // Temporary way to reset
-            _patternGenerator._currentPointIndex = 0;
         }
 
         if (_customMouse.IsRightButtonClicked())

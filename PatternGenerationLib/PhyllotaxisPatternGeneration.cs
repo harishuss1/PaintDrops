@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using ShapeLibrary;
 using PaintDropSimulation;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("PatternGenerationLibTests")]
 
 namespace PatternGenerationLib
 {
-    public class PhyllotaxisPatternGeneration : IPatternGenerator
+    internal class PhyllotaxisPatternGeneration : IPatternGenerator
     {
-        private double GoldenAngle = 137.5 * Math.PI / 180; 
+        private const double GoldenAngle = 137.5 * Math.PI / 180; 
         private float _scalingFactor;
-        public int _currentPointIndex;
+        private int _currentPointIndex;
 
         public PhyllotaxisPatternGeneration(float scalingFactor)
         {
