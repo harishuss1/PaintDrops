@@ -4,8 +4,9 @@
 `PaintDropSimulation` is a C# program that simulates marbling effects between paint drops on a surface. Each paint drop is represented by a circular shape with a color, and when new drops are added to the surface, they interact with existing drops, causing their vertices to shift in a marbling pattern. 
 
 ## Features
-- **Paint Drop Simulation**: Add paint drops to a surface and see them interact through a marbling effect.
+- **Paint Drop Simulation**: Add paint drops to a surface and see them interact through a marbling effect. **Left Click** to add Paint drops, **Right click** to clear the surface.
 - **Custom Input Handling**: Control the simulation using mouse inputs.
+- **Phyllotaxis Pattern Generation**: Generate a Phyllotaxis pattern using paint drops by pressing **M** to start the generation and **E** to stop and reset the generation.
 
 ## Setup and Installation
 ### Clone

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace PaintDropSimulation
 {
+    public delegate Vector? CalculatePatternPoint(ISurface surface);
     public interface ISurface
     {
         /// <summary>
@@ -28,5 +28,10 @@ namespace PaintDropSimulation
         /// </summary>
         /// <param name="drop">The new drop to be added to the surface</param>
         void AddPaintDrop(IPaintDrop drop);
+
+        event CalculatePatternPoint PatternGeneration;
+
+        void GeneratePaintDropPattern(float radius, Colour colour);
+
     }
 }
