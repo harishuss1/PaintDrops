@@ -27,7 +27,7 @@ public class PaintDrops : Game
     private ISurface _surface;
     private IPatternGenerator _patternGenerator;
     private bool _isPatternGenerating;
-    private SpriteFont _font;
+    //private SpriteFont _font;
     private int _currentRadius;
 
     public PaintDrops()
@@ -56,7 +56,7 @@ public class PaintDrops : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _spritesRenderer = new SpritesRenderer(GraphicsDevice);
         _shapesRenderer= new ShapesRenderer(GraphicsDevice);
-        _font = Content.Load<SpriteFont>("Counter");
+        //_font = Content.Load<SpriteFont>("Counter");
 
 
     }
@@ -131,15 +131,15 @@ public class PaintDrops : Game
 
         _shapesRenderer.End();
 
-        _spriteBatch.Begin();
-        string radiusText = $"Radius: {_currentRadius}";
+        //_spriteBatch.Begin();
+        //string radiusText = $"Radius: {_currentRadius}";
 
-        Vector2 textSize = _font.MeasureString(radiusText);
+        //Vector2 textSize = _font.MeasureString(radiusText);
 
-        Vector2 textPosition = new Vector2(screen.Width - textSize.X, 0);
+        //Vector2 textPosition = new Vector2(screen.Width - textSize.X, 0);
 
-        _spriteBatch.DrawString(_font, radiusText, textPosition, Microsoft.Xna.Framework.Color.Black);
-        _spriteBatch.End();
+        //_spriteBatch.DrawString(_font, radiusText, textPosition, Microsoft.Xna.Framework.Color.Black);
+        //_spriteBatch.End();
         screen.UnSet();
         screen.Present(_spritesRenderer, true);
 
