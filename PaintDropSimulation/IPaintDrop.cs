@@ -19,5 +19,7 @@ namespace PaintDropSimulation
         /// </summary>
         /// <param name="other">The other paintdrop to be combined with</param>
         void Marble(IPaintDrop other);
+
+        public IRectangle BoundingBox { get; }
     }
 }
