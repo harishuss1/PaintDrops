@@ -49,5 +49,19 @@ namespace ShapeLibrary
             Height = height;
             Colour = colour;
         }
+
+        public bool Intersect(IRectangle rectangle)
+        {
+            float thisRight = X + Width;
+            float thisBottom = Y + Height;
+            float otherRight = rectangle.X + rectangle.Width;
+            float otherBottom = rectangle.Y + rectangle.Height;
+
+            bool intersect = X < otherRight && thisRight > rectangle.X &&
+                             Y < otherBottom && thisBottom > rectangle.Y;
+
+            return intersect;
+        }
+
     }
 }

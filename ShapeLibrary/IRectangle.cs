@@ -24,5 +24,11 @@ namespace ShapeLibrary
         /// The height of the rectangle
         /// </summary>
         public float Height { get; }
+
+        // <summary>
+        // Computes  the intersection of the input rectangle with itself and returns true if the rectangle intersect 
+        // <summary>
+        public bool Intersect(IRectangle rectangle);
+
     }
 }
