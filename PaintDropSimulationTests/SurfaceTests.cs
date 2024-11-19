@@ -110,5 +110,30 @@ namespace PaintDropSimulation.Tests
             Assert.AreEqual(1, surface.Drops.Count, "new paint drop should be added to the surface.");
         }
 
+        [TestMethod]
+        public void Surface_AddPaintDrop_ShouldRemoveDropsOutsideBorder()
+        {
+            var surface = new Surface(100, 100);
+            var dropInside = new PaintDrop(ShapesFactory.CreateCircle(50, 50, 20, new Colour(255, 0, 0)));
+            var dropOutside = new PaintDrop(ShapesFactory.CreateCircle(150, 150, 20, new Colour(0, 255, 0)));
+
+            surface.AddPaintDrop(dropInside);
+            surface.AddPaintDrop(dropOutside);
+
+            Assert.AreEqual(1, surface.Drops.Count);
+            Assert.AreSame(dropInside, surface.Drops[0]);
+        }
+
+        [TestMethod]
+        public void Surface_AddPaintDrop_ShouldNotAddDropOutsideBorder()
+        {
+            var surface = new Surface(100, 100);
+            var dropOutside = new PaintDrop(ShapesFactory.CreateCircle(150, 150, 20, new Colour(0, 255, 0)));
+
+            surface.AddPaintDrop(dropOutside);
+
+            Assert.AreEqual(0, surface.Drops.Count);
+        }
+
     }
 }
