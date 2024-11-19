@@ -52,16 +52,25 @@ namespace ShapeLibrary
 
         public bool Intersect(IRectangle rectangle)
         {
-            float thisRight = X + Width;
-            float thisBottom = Y + Height;
-            float otherRight = rectangle.X + rectangle.Width;
-            float otherBottom = rectangle.Y + rectangle.Height;
+            Vector thisTopLeft = Vertices[0];
+            Vector thisBottomRight = Vertices[2];
 
-            bool intersect = X < otherRight && thisRight > rectangle.X &&
-                             Y < otherBottom && thisBottom > rectangle.Y;
+            Vector otherTopLeft = rectangle.Vertices[0];
+            Vector otherBottomRight = rectangle.Vertices[2];
 
-            return intersect;
+            float resultRectangleTopLeftX = Math.Max(thisTopLeft.X, otherTopLeft.X);
+            float resultRectangleTopLeftY = Math.Max(thisTopLeft.Y, otherTopLeft.Y);
+            Vector resultRectangleTopLeft = new Vector(resultRectangleTopLeftX, resultRectangleTopLeftY);
+
+            float resultRectangleBottomRightX = Math.Min(thisBottomRight.X, otherBottomRight.X);
+            float resultRectangleBottomRightY = Math.Min(thisBottomRight.Y, otherBottomRight.Y);
+            Vector resultRectangleBottomRight = new Vector(resultRectangleBottomRightX, resultRectangleBottomRightY);
+
+            bool intersects = resultRectangleTopLeft.X < resultRectangleBottomRight.X && resultRectangleTopLeft.Y < resultRectangleBottomRight.Y;
+
+            return intersects;
         }
+
 
     }
 }
