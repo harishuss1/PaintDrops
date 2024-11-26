@@ -29,6 +29,8 @@ public class PaintDrops : Game
     private bool _isPatternGenerating;
     private SpriteFont _font;
     private int _currentRadius;
+    private List<IPatternGenerator> _patterns;
+    private int _currentPatternIndex;
 
     public PaintDrops()
     {
@@ -44,8 +46,14 @@ public class PaintDrops : Game
         screen = new Screen(_renderTarget);
         _surface = PaintDropSimulationFactory.CreateSurface(screen.Width,screen.Height);
 
-        _patternGenerator = PatternGenerationFactory.CreatePhylloPattern(10);
-        _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
+
+        _patterns = new List<IPatternGenerator>
+        {   
+        PatternGenerationFactory.CreatePhylloPattern(10),
+        PatternGenerationFactory.CreateSpiroPattern(100, 6)
+        };
+        _currentPatternIndex = 0;
+        _patternGenerator = _patterns[_currentPatternIndex];
 
         _currentRadius = 50;
         base.Initialize();
@@ -82,6 +90,16 @@ public class PaintDrops : Game
         if (_customKeyboard.IsKeyClicked(Keys.E))
         {
             _isPatternGenerating = false;
+        }
+
+        if (_customKeyboard.IsKeyClicked(Keys.P))
+        {
+            _surface.PatternGeneration -= _patternGenerator.CalculatePatternPoint;
+
+            _currentPatternIndex = (_currentPatternIndex + 1) % _patterns.Count;
+            _patternGenerator = _patterns[_currentPatternIndex];
+
+            _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
         }
 
         if (_customMouse.IsRightButtonClicked())
