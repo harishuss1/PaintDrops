@@ -9,6 +9,10 @@ build-debug:
   stage: build
   script:
     - echo "Building in Debug mode!"
+    - apt-get update && apt-get install -y fontconfig
+    - mkdir -p /usr/share/fonts/truetype/paintdrops
+    - cp PaintDrops/Content/Fonts/Arial.ttf /usr/share/fonts/truetype/paintdrops
+    - fc-cache -fv
     - dotnet restore
     - dotnet build -c Debug
 
@@ -16,6 +20,10 @@ build-release:
   stage: build
   script:
     - echo "Building in Release mode!"
+    - apt-get update && apt-get install -y fontconfig
+    - mkdir -p /usr/share/fonts/truetype/paintdrops
+    - cp PaintDrops/Content/Fonts/Arial.ttf /usr/share/fonts/truetype/paintdrops
+    - fc-cache -fv
     - dotnet restore
     - dotnet build -c Release
     - echo "Publishing PaintDrops as a no-self-contained app"
