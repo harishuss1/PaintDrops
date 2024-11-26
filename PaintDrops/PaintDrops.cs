@@ -54,6 +54,7 @@ public class PaintDrops : Game
         };
         _currentPatternIndex = 0;
         _patternGenerator = _patterns[_currentPatternIndex];
+        _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
 
         _currentRadius = 50;
         base.Initialize();

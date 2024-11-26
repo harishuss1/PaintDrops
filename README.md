@@ -6,8 +6,12 @@
 ## Features
 - **Paint Drop Simulation**: Add paint drops to a surface and see them interact through a marbling effect. **Left Click** to add Paint drops, **Right click** to clear the surface.
 - **Custom Input Handling**: Control the simulation using mouse inputs.
-- **Phyllotaxis Pattern Generation**: Generate a Phyllotaxis pattern using paint drops by pressing **M** to start the generation and **E** to stop and reset the generation.
 - **Dynamic Radius**: This feature allows you to change the radius of the paint drop that are being placed **Minimum** 10, **Maximum** 150, **Down Arrow Key** to increment by 10, **Up Arrow Key** to increment by 10. You are able to see your current radius in the top right.
+- **Pattern Generation & Toggle**: 
+  - Press **M** to start generating a pattern using paint drops.
+  - Press **E** to stop and reset the generation.
+  - Toggle between **Phyllotaxis** and **Spirograph** patterns by pressing **P**.
+
 ## Setup and Installation
 ### Clone
 1. Clone the repository.
