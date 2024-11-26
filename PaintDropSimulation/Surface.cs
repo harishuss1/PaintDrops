@@ -19,7 +19,7 @@ namespace PaintDropSimulation
 
         public event CalculatePatternPoint? PatternGeneration;
 
-        public IRectangle BorderSurface { get; }
+        private IRectangle BorderSurface { get; }
         public Surface(int width, int height)
         {
             if (width < 0 || height < 0)
@@ -41,15 +41,13 @@ namespace PaintDropSimulation
 
             if (BorderSurface.Intersect(drop.BoundingBox))
             {
+                Parallel.ForEach(Drops, existingDrop =>
+                {   
+                        existingDrop.Marble(drop);
+                });
+                //Removed If statement to not marble recent drop and parallized loop.
                 Drops.Add(drop);
 
-                foreach (var existingDrop in Drops)
-                {
-                    if (existingDrop != drop)
-                    {
-                        existingDrop.Marble(drop);
-                    }
-                }
             }
 
             Drops.RemoveAll(d => !BorderSurface.Intersect(d.BoundingBox));
