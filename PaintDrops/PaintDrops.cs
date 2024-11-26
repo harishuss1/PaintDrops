@@ -27,6 +27,8 @@ public class PaintDrops : Game
     private ISurface _surface;
     private IPatternGenerator _patternGenerator;
     private bool _isPatternGenerating;
+    private SpriteFont _font;
+    private int _currentRadius;
 
     public PaintDrops()
     {
@@ -45,6 +47,7 @@ public class PaintDrops : Game
         _patternGenerator = PatternGenerationFactory.CreatePhylloPattern(10);
         _surface.PatternGeneration += _patternGenerator.CalculatePatternPoint;
 
+        _currentRadius = 50;
         base.Initialize();
     }
 
@@ -53,6 +56,7 @@ public class PaintDrops : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _spritesRenderer = new SpritesRenderer(GraphicsDevice);
         _shapesRenderer= new ShapesRenderer(GraphicsDevice);
+        _font = Content.Load<SpriteFont>("Counter");
 
 
     }
@@ -61,6 +65,15 @@ public class PaintDrops : Game
     {
         _customKeyboard.Update();
         _customMouse.Update();
+
+        if (_customKeyboard.IsKeyClicked(Keys.Up))
+        {
+            _currentRadius = Math.Min(_currentRadius + 10, 150);
+        }
+        if (_customKeyboard.IsKeyClicked(Keys.Down))
+        {
+            _currentRadius = Math.Max(_currentRadius - 10, 10);
+        }
 
         if (_customKeyboard.IsKeyClicked(Keys.M))
         {
@@ -88,7 +101,7 @@ public class PaintDrops : Game
                 int green = random.Next(0, 256);
                 int blue = random.Next(0, 256);
                 Colour randomColor = new Colour(red, green, blue);
-                ICircle circle = ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, 50, randomColor);
+                ICircle circle = ShapesFactory.CreateCircle(screenPosition.Value.X, screenPosition.Value.Y, _currentRadius, randomColor);
 
                 IPaintDrop drop = PaintDropSimulationFactory.CreatePaintDrop(circle);
 
@@ -117,6 +130,16 @@ public class PaintDrops : Game
         }
 
         _shapesRenderer.End();
+
+        _spriteBatch.Begin();
+        string radiusText = $"Radius: {_currentRadius}";
+
+        Vector2 textSize = _font.MeasureString(radiusText);
+
+        Vector2 textPosition = new Vector2(screen.Width - textSize.X, 0);
+
+        _spriteBatch.DrawString(_font, radiusText, textPosition, Microsoft.Xna.Framework.Color.Black);
+        _spriteBatch.End();
         screen.UnSet();
         screen.Present(_spritesRenderer, true);
 

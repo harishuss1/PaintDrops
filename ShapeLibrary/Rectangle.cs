@@ -49,5 +49,28 @@ namespace ShapeLibrary
             Height = height;
             Colour = colour;
         }
+
+        public bool Intersect(IRectangle rectangle)
+        {
+            Vector thisTopLeft = Vertices[0];
+            Vector thisBottomRight = Vertices[2];
+
+            Vector otherTopLeft = rectangle.Vertices[0];
+            Vector otherBottomRight = rectangle.Vertices[2];
+
+            float resultRectangleTopLeftX = Math.Max(thisTopLeft.X, otherTopLeft.X);
+            float resultRectangleTopLeftY = Math.Max(thisTopLeft.Y, otherTopLeft.Y);
+            Vector resultRectangleTopLeft = new Vector(resultRectangleTopLeftX, resultRectangleTopLeftY);
+
+            float resultRectangleBottomRightX = Math.Min(thisBottomRight.X, otherBottomRight.X);
+            float resultRectangleBottomRightY = Math.Min(thisBottomRight.Y, otherBottomRight.Y);
+            Vector resultRectangleBottomRight = new Vector(resultRectangleBottomRightX, resultRectangleBottomRightY);
+
+            bool intersects = resultRectangleTopLeft.X < resultRectangleBottomRight.X && resultRectangleTopLeft.Y < resultRectangleBottomRight.Y;
+
+            return intersects;
+        }
+
+
     }
 }

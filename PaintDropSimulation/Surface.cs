@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,6 +19,7 @@ namespace PaintDropSimulation
 
         public event CalculatePatternPoint? PatternGeneration;
 
+        public IRectangle BorderSurface { get; }
         public Surface(int width, int height)
         {
             if (width < 0 || height < 0)
@@ -27,23 +29,30 @@ namespace PaintDropSimulation
             Width = width;
             Height = height;
             Drops = new List<IPaintDrop>();
-        }
+            BorderSurface =  ShapesFactory.CreateRectangle(0, 0, width, height, new Colour(255,0,0));
 
+        }
         public void AddPaintDrop(IPaintDrop drop)
         {
             if (drop == null)
             {
                 throw (new ArgumentNullException());
             }
-            Drops.Add(drop);
 
-            foreach (var existingDrop in Drops)
+            if (BorderSurface.Intersect(drop.BoundingBox))
             {
-                if (existingDrop != drop)
+                Drops.Add(drop);
+
+                foreach (var existingDrop in Drops)
                 {
-                    existingDrop.Marble(drop);
+                    if (existingDrop != drop)
+                    {
+                        existingDrop.Marble(drop);
+                    }
                 }
             }
+
+            Drops.RemoveAll(d => !BorderSurface.Intersect(d.BoundingBox));
         }
 
         public void GeneratePaintDropPattern(float radius, Colour colour)

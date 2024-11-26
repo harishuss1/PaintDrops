@@ -76,5 +76,50 @@ namespace ShapeLibrary.Tests
             Assert.AreSame(firstAccess, secondAccess); 
         }
 
+        [TestMethod]
+        public void Intersect_ShouldReturnTrue_WhenRectanglesOverlap()
+        {
+            Rectangle rect1 = new Rectangle(0, 0, 10, 10, new Colour(255, 0, 0));
+            Rectangle rect2 = new Rectangle(5, 5, 10, 10, new Colour(0, 255, 0));
+
+            bool result = rect1.Intersect(rect2);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Intersect_ShouldReturnFalse_WhenRectanglesDoNotOverlap()
+        {
+            Rectangle rect1 = new Rectangle(0, 0, 10, 10, new Colour(255, 0, 0));
+            Rectangle rect2 = new Rectangle(20, 20, 10, 10, new Colour(0, 255, 0));
+
+            bool result = rect1.Intersect(rect2);
+
+            Assert.IsFalse(result);
+        }
+
+
+        [TestMethod]
+        public void Intersect_ShouldReturnFlase_WhenRectanglesTouchAtEdges()
+        {
+            Rectangle rect1 = new Rectangle(0, 0, 10, 10, new Colour(255, 0, 0));
+            Rectangle rect2 = new Rectangle(10, 0, 10, 10, new Colour(0, 255, 0));
+
+            bool result = rect1.Intersect(rect2);
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void Intersect_ShouldReturnFalse_WhenRectanglesTouchAtCorners()
+        {
+            Rectangle rect1 = new Rectangle(0, 0, 10, 10, new Colour(255, 0, 0));
+            Rectangle rect2 = new Rectangle(10, 10, 10, 10, new Colour(0, 255, 0));
+
+            bool result = rect1.Intersect(rect2);
+
+            Assert.IsFalse(result);
+        }
+
     }
 }

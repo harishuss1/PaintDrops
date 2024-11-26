@@ -1,6 +1,7 @@
 ﻿using ShapeLibrary;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,6 +15,16 @@ namespace PaintDropSimulation
     {
         public ICircle Circle {  get;}
 
+        private IRectangle _boundingBox;
+        public IRectangle BoundingBox
+        {
+            get
+            {
+                UpdateBoundingBox();
+                return _boundingBox;
+            }
+        }
+
         public PaintDrop(ICircle circle)
         {
             if (circle == null)
@@ -22,6 +33,8 @@ namespace PaintDropSimulation
             }
 
             Circle = circle;
+            UpdateBoundingBox();
+
         }
 
         public void Marble(IPaintDrop other)
@@ -49,7 +62,21 @@ namespace PaintDropSimulation
                     Circle.Vertices[i] = newVertexPosition;
                 }
             }
+            UpdateBoundingBox();
         }
+        private void UpdateBoundingBox()
+        {
+            float minX = Circle.Vertices.Min(v => v.X);
+            float minY = Circle.Vertices.Min(v => v.Y);
+            float maxX = Circle.Vertices.Max(v => v.X);
+            float maxY = Circle.Vertices.Max(v => v.Y);
+
+            float width = maxX - minX;
+            float height = maxY - minY;
+
+            _boundingBox = ShapesFactory.CreateRectangle(minX, minY, width, height, new Colour(255, 0, 0));
         }
+
+    }
 }
 
