@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatternGenerationLib", "Pat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternGenerationLibTests", "PatternGenerationLibTests\PatternGenerationLibTests.csproj", "{CD6472EE-A667-4E54-BE9B-C889D989DB43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaintDropSimulationBenchMarking", "PaintDropSimulationBenchMarking\PaintDropSimulationBenchMarking.csproj", "{95C92227-C8DB-48C0-BEA4-DC989DBDEE8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{CD6472EE-A667-4E54-BE9B-C889D989DB43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD6472EE-A667-4E54-BE9B-C889D989DB43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD6472EE-A667-4E54-BE9B-C889D989DB43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C92227-C8DB-48C0-BEA4-DC989DBDEE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C92227-C8DB-48C0-BEA4-DC989DBDEE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C92227-C8DB-48C0-BEA4-DC989DBDEE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C92227-C8DB-48C0-BEA4-DC989DBDEE8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
