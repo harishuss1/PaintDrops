@@ -9,8 +9,8 @@ class PaintDropSimulationBenchmarking
     {
         Console.WriteLine("PaintDropSimulation Benchmarking...");
 
-        var surfaceSizes = new[] { 100, 500, 1000, 2000 }; 
-        var numberOfDropsArray = new[] { 10, 50, 100, 200 }; 
+        var surfaceSizes = new[] { 500, 2000 }; 
+        var numberOfDropsArray = new[] { 100, 1000 }; 
 
         foreach (var size in surfaceSizes)
         {
