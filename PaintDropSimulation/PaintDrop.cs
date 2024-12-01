@@ -15,12 +15,16 @@ namespace PaintDropSimulation
     {
         public ICircle Circle {  get;}
 
-        private IRectangle _boundingBox;
+        private IRectangle ?_boundingBox;
         public IRectangle BoundingBox
         {
             get
             {
-                UpdateBoundingBox();
+                // Fix Lazy Loading
+                if (_boundingBox == null)
+                {
+                    UpdateBoundingBox();
+                }
                 return _boundingBox;
             }
         }
@@ -45,31 +49,44 @@ namespace PaintDropSimulation
             }
 
             Vector otherCenter = other.Circle.Center;
-            float otherRadius = other.Circle.Radius;
+            float otherRadiusSquared = other.Circle.Radius * other.Circle.Radius;
 
             for (int i = 0; i < Circle.Vertices.Length; i++)
             {
                 Vector currentVertex = Circle.Vertices[i];
                 Vector differenceVector = currentVertex - otherCenter;
 
-                float magnitudeSquared = (float)(Math.Pow(differenceVector.X, 2) + Math.Pow(differenceVector.Y, 2));
+                // Compute Math.Pow manually since Math.pow is performance heavy 
+                float magnitudeSquared = differenceVector.X * differenceVector.X + differenceVector.Y * differenceVector.Y;
 
                 if (magnitudeSquared > 0)
                 {
-                    float scalingFactor = (float)Math.Sqrt(1 + Math.Pow(otherRadius, 2) / magnitudeSquared);
-                    Vector newVertexPosition = otherCenter + differenceVector * scalingFactor;
+                    float scalingFactor = (float)Math.Sqrt(1 + otherRadiusSquared / magnitudeSquared);
+                    // Directly update vertices instead creating a variable
+                    Circle.Vertices[i] = otherCenter + differenceVector * scalingFactor;
 
-                    Circle.Vertices[i] = newVertexPosition;
                 }
             }
             UpdateBoundingBox();
         }
+
         private void UpdateBoundingBox()
         {
-            float minX = Circle.Vertices.Min(v => v.X);
-            float minY = Circle.Vertices.Min(v => v.Y);
-            float maxX = Circle.Vertices.Max(v => v.X);
-            float maxY = Circle.Vertices.Max(v => v.Y);
+            // Intialize the min and max values
+            var firstVertex = Circle.Vertices[0];
+            float minX = firstVertex.X;
+            float minY = firstVertex.Y;
+            float maxX = firstVertex.X;
+            float maxY = firstVertex.Y;
+
+            // Iterate through the vertices to set the min and max in a single loop
+            foreach (var vertex in Circle.Vertices)
+            {
+                if (vertex.X < minX) minX = vertex.X;
+                if (vertex.Y < minY) minY = vertex.Y;
+                if (vertex.X > maxX) maxX = vertex.X;
+                if (vertex.Y > maxY) maxY = vertex.Y;
+            }
 
             float width = maxX - minX;
             float height = maxY - minY;
